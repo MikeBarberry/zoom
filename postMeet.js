@@ -1,9 +1,16 @@
 const https = require('node:https');
 const fs = require('node:fs');
 
+/*
 const client = {
   name: 'Clara',
   email: 'clarasroufe@gmail.com',
+};
+*/
+
+const client = {
+  name: 'Mouse',
+  email: 'mbarberry20@outlook.com',
 };
 
 const topic = `${client.name} & Mike Meeting`;
@@ -25,7 +32,7 @@ const requestData = JSON.stringify({
     ],
   },
   timezone: 'America/Los_Angeles',
-  start_time: '2023-11-17T23:00:00',
+  start_time: '2024-02-03T13:00:00',
 });
 
 const request = {
@@ -33,7 +40,7 @@ const request = {
   path: `/v2/users/me/meetings`,
   method: 'post',
   headers: {
-    Authorization: `Bearer  eyJzdiI6IjAwMDAwMSIsImFsZyI6IkhTNTEyIiwidiI6IjIuMCIsImtpZCI6ImZmY2I3OGVmLWRlYzQtNDQzZC05NmJkLTJkNGY5YmIwZjFmYSJ9.eyJhdWQiOiJodHRwczovL29hdXRoLnpvb20udXMiLCJ1aWQiOiJRazRFdnYycFFzQ2RhenRrNi1YdVZRIiwidmVyIjo5LCJhdWlkIjoiNzVhOWYwYTFkNWViZGI4NjdhOWQ3YjI0Mjc4YmUwOGQiLCJuYmYiOjE3MDAyODk5MTYsImNvZGUiOiJOMVV1YUVaclR0RzgzejE5dFZXb0lnejlUR3RNaWljdWUiLCJpc3MiOiJ6bTpjaWQ6aVBsb2FDdVNCSzVkYXNIdjFSb0lBIiwiZ25vIjowLCJleHAiOjE3MDAyOTM1MTYsInR5cGUiOjMsImlhdCI6MTcwMDI4OTkxNiwiYWlkIjoiR18tdmNzUEpUNHFJckdlRDJNRXhFdyJ9.eQPb6ivh4QFfSETnpPPvs8_f9nqSxvKzDvCNhHHj0jylERSRZLGWQ2Ld_siXw0nUJumTXkMLz47lVt1qQvAcjw`,
+    Authorization: `Bearer eyJzdiI6IjAwMDAwMSIsImFsZyI6IkhTNTEyIiwidiI6IjIuMCIsImtpZCI6Ijk3ZTY3MWQyLTliYTgtNDdkZi1hOTM3LWQzYTFiMWQyZWU4YyJ9.eyJhdWQiOiJodHRwczovL29hdXRoLnpvb20udXMiLCJ1aWQiOiJRazRFdnYycFFzQ2RhenRrNi1YdVZRIiwidmVyIjo5LCJhdWlkIjoiNzVhOWYwYTFkNWViZGI4NjdhOWQ3YjI0Mjc4YmUwOGQiLCJuYmYiOjE3MDY5MjIwNDAsImNvZGUiOiIxS1c4VW1ERVFOT1pnRUhHZ3ZOWXNnOVMwUzZZSU1tQWwiLCJpc3MiOiJ6bTpjaWQ6aVBsb2FDdVNCSzVkYXNIdjFSb0lBIiwiZ25vIjowLCJleHAiOjE3MDY5MjU2NDAsInR5cGUiOjMsImlhdCI6MTcwNjkyMjA0MCwiYWlkIjoiR18tdmNzUEpUNHFJckdlRDJNRXhFdyJ9.uwIaqHvxXBIfECet6zCRY6isVWQDmdkapy7kRefXDQjKFH54tAAV11qfpHP3S_0xMurssWiScFd17XRa2o4Naw`,
     'Content-Type': 'application/json',
   },
 };
@@ -68,9 +75,10 @@ const makeRequest = () => {
 (async () => {
   try {
     const response = await makeRequest();
+    console.log(response, typeof response);
     fs.writeFileSync(
       process.cwd().concat('/artifacts/postMeetRes.json'),
-      response,
+      JSON.stringify(response),
       {
         flag: 'w',
       }
